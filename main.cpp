@@ -7,26 +7,26 @@
 using namespace std;
 
 template <typename T>
-class PriorityQueue {
+class PriorityQueue{
 private:
-    vector<T> data;
-    function<double(T)> priority;
+    vector<T>data;
+    function<double(T)>priority;
 
 public:
     PriorityQueue(function<double(T)> priority_func) {
         priority = priority_func;
     }
 
-    void push(const T& val) {
+    void push(const T& val){
         data.push_back(val);
-        sort(data.begin(), data.end(), [this](const T& a, const T& b) {
-            return priority(a) > priority(b);
+        sort(data.begin(),data.end(),[this](const T& a, const T& b){
+            return priority(a) > priority(b);// sorts by largest to smallest
         });
     }
 
-    T pop() {
-        if (is_empty()) {
-            cout << "Error: PriorityQueue is empty!" << endl;
+    T pop(){
+        if(is_empty()){
+            cout << "Error: Priority Queue is empty!" << endl;
             exit(1);
         }
         T front = data.front();
@@ -34,10 +34,10 @@ public:
         return front;
     }
 
-    bool is_empty() const { return data.empty(); }
+    bool is_empty()const{return data.empty();}
 };
 
-int main() {
+int main(){
     PriorityQueue<string> pq([](string s){return (double)s.length();});
 
     pq.push("hello");
